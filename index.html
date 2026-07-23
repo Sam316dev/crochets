@@ -38,7 +38,7 @@
   a { color: inherit; text-decoration: none; }
   img { max-width: 100%; display: block; }
   
-  /* Image Utility Class (Replaces inline styles) */
+  /* Image Utility Class */
   .img-cover {
     width: 100%;
     height: 100%;
@@ -69,7 +69,14 @@
     background: linear-gradient(to bottom, rgba(247,242,233,0.95), rgba(247,242,233,0));
   }
   .logo { font-family: 'Fraunces', serif; font-size: 22px; font-weight: 600; color: var(--walnut); }
-  .logo-img { height: 44px; width: auto; border-radius: 8px; }
+  
+  /* Default logo size for mobile */
+  .logo-img { 
+    height: 40px; 
+    width: auto; 
+    border-radius: 8px; 
+    transition: height 0.3s ease; 
+  }
   .logo span { color: var(--clay); font-style: italic; }
   .nav-links { display: flex; gap: 36px; font-size: 14px; letter-spacing: 0.03em; }
   .nav-links a { position: relative; padding-bottom: 4px; }
@@ -212,6 +219,13 @@
   /* ---------- Footer ---------- */
   footer { text-align: center; padding: 48px 6vw 56px; font-size: 14px; color: var(--walnut-soft); }
 
+  /* Desktop Logo Resize and Mobile Breakpoints */
+  @media (min-width: 861px) {
+    .logo-img { 
+      height: 56px; 
+    }
+  }
+
   @media (max-width: 860px) {
     .about { grid-template-columns: 1fr; }
     .gallery-grid { grid-template-columns: repeat(2,1fr); }
@@ -238,7 +252,7 @@
 <main>
   <section class="hero" id="home">
     <div class="hero-eyebrow">Handmade, one stitch at a time</div>
-    <h1>Crochet made slow, <em>made with heart</em></h1>
+    <h1>Crocheting, <em>made with love</em></h1>
     <p>Cozy pieces worked by hand — amigurumi, blankets, and wearables made to order, no two exactly alike.</p>
     <div class="hero-cta">
       <a href="#gallery" class="btn btn-primary">See the pieces</a>
