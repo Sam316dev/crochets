@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Nicolette Crochets - Crocheting, made with love. Handmade beanies, blankets, and wearables ready to wear.">
+<meta name="description" content="Nicolette Crochets - Crocheting, made with love. Handmade amigurumi, blankets, and wearables made to order.">
 <title>Nicolette Crochets — Handmade Crochet</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -60,11 +60,20 @@
   header {
     position: fixed; top: 0; left: 0; right: 0;
     display: flex; justify-content: space-between; align-items: center;
-    padding: 24px 6vw;
+    padding: 20px 6vw;
     z-index: 100;
-    background: linear-gradient(to bottom, rgba(247,242,233,0.95), rgba(247,242,233,0));
+    background: linear-gradient(to bottom, rgba(247,242,233,0.98) 70%, rgba(247,242,233,0));
+    transition: background 0.3s ease;
   }
-  .logo { font-family: 'Fraunces', serif; font-size: 22px; font-weight: 600; color: var(--walnut); }
+  
+  .logo { 
+    font-family: 'Fraunces', serif; 
+    font-size: 22px; 
+    font-weight: 600; 
+    color: var(--walnut); 
+    position: relative;
+    z-index: 101;
+  }
   
   .logo-img { 
     height: 40px; 
@@ -72,8 +81,10 @@
     border-radius: 8px; 
     transition: height 0.3s ease; 
   }
-  .logo span { color: var(--clay); font-style: italic; }
-  .nav-links { display: flex; gap: 36px; font-size: 14px; letter-spacing: 0.03em; }
+  
+  .nav-links { 
+    display: flex; gap: 36px; font-size: 14px; letter-spacing: 0.03em; 
+  }
   .nav-links a { position: relative; padding-bottom: 4px; }
   .nav-links a::after {
     content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 1px;
@@ -81,10 +92,44 @@
   }
   .nav-links a:hover::after, .nav-links a:focus::after { width: 100%; outline: none;}
 
+  /* Mobile Menu Button */
+  .menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 101;
+    padding: 8px;
+  }
+  .hamburger {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--walnut);
+    position: relative;
+    transition: background 0.2s ease;
+  }
+  .hamburger::before, .hamburger::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--walnut);
+    transition: transform 0.3s ease, top 0.3s ease;
+  }
+  .hamburger::before { top: -6px; }
+  .hamburger::after { top: 6px; }
+
+  /* Mobile Menu Open State */
+  .menu-open .hamburger { background: transparent; }
+  .menu-open .hamburger::before { top: 0; transform: rotate(45deg); }
+  .menu-open .hamburger::after { top: 0; transform: rotate(-45deg); }
+
   .hero {
     min-height: 100vh;
     display: flex; flex-direction: column; align-items: center; justify-content: center;
-    text-align: center; padding: 0 6vw; position: relative;
+    text-align: center; padding: 100px 6vw 40px; position: relative;
   }
   .hero-eyebrow {
     font-size: 13px; letter-spacing: 0.15em; text-transform: uppercase;
@@ -92,7 +137,7 @@
     opacity: 0; animation: fadeIn 1s ease 0.2s forwards;
   }
   .hero h1 {
-    font-size: clamp(40px, 7vw, 76px); line-height: 1.05; max-width: 900px;
+    font-size: clamp(40px, 9vw, 76px); line-height: 1.05; max-width: 900px;
     opacity: 0; animation: fadeIn 1.1s ease 0.4s forwards;
   }
   .hero h1 em { font-style: italic; color: var(--clay); }
@@ -103,6 +148,7 @@
   .hero-cta {
     margin-top: 40px; display: flex; gap: 16px;
     opacity: 0; animation: fadeIn 1.1s ease 1s forwards;
+    flex-wrap: wrap; justify-content: center;
   }
   @keyframes fadeIn {
     from { opacity: 0; transform: translateY(16px); }
@@ -112,6 +158,7 @@
   .btn {
     display: inline-block; padding: 14px 32px; border-radius: 100px;
     font-size: 14px; letter-spacing: 0.02em; transition: all 0.25s ease;
+    text-align: center;
   }
   .btn-primary { background: var(--walnut); color: var(--cream); }
   .btn-primary:hover, .btn-primary:focus { background: var(--clay); transform: translateY(-2px); outline: none;}
@@ -119,11 +166,11 @@
   .btn-ghost:hover, .btn-ghost:focus { background: var(--walnut); color: var(--cream); border-color: var(--walnut); outline: none;}
 
   section { padding: 110px 6vw; }
-  .section-head { text-align: center; max-width: 600px; margin: 0 auto 64px; }
+  .section-head { text-align: center; max-width: 600px; margin: 0 auto 56px; }
   .section-eyebrow {
-    font-size: 13px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--sage-dark); margin-bottom: 16px;
+    font-size: 13px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--sage-dark); margin-bottom: 12px;
   }
-  .section-head h2 { font-size: clamp(30px, 4vw, 44px); }
+  .section-head h2 { font-size: clamp(28px, 6vw, 44px); line-height: 1.1; }
 
   .about {
     display: grid; grid-template-columns: 1fr 1.1fr; gap: 64px; align-items: center;
@@ -140,8 +187,7 @@
     background: repeating-linear-gradient(45deg, transparent, transparent 12px, rgba(74,63,53,0.05) 12px, rgba(74,63,53,0.05) 13px);
   }
   .about-img.has-photo::before { content: none; }
-  .piece-img.has-photo::before { content: none; }
-  .about h3 { font-size: 30px; margin-bottom: 20px; }
+  .about h3 { font-size: clamp(24px, 5vw, 30px); margin-bottom: 20px; line-height: 1.2; }
   .about p { color: var(--walnut-soft); margin-bottom: 16px; max-width: 460px; }
   .about-signature {
     margin-top: 24px; font-family: 'Fraunces', serif; font-style: italic; font-size: 20px; color: var(--clay);
@@ -161,6 +207,7 @@
     content: ''; position: absolute; inset: 0;
     background: repeating-linear-gradient(-45deg, transparent, transparent 10px, rgba(74,63,53,0.05) 10px, rgba(74,63,53,0.05) 11px);
   }
+  .piece-img.has-photo::before { content: none; }
   .piece:hover .piece-img { transform: scale(1.03); }
   .piece-img img { border-radius: inherit; }
   .piece-title { margin-top: 16px; font-size: 17px; font-weight: 500; font-family: 'Fraunces', serif; }
@@ -184,7 +231,7 @@
     max-width: 1000px; margin: 0 auto; padding: 80px 6vw;
     display: grid; grid-template-columns: 1fr 1fr; gap: 56px;
   }
-  .contact h2 { color: var(--cream); font-size: clamp(28px,3.5vw,38px); margin-bottom: 16px; }
+  .contact h2 { color: var(--cream); font-size: clamp(28px,6vw,38px); margin-bottom: 16px; line-height: 1.1; }
   .contact p { color: #D9CFC2; max-width: 380px; margin-bottom: 8px; }
   .contact-list { margin-top: 28px; font-size: 15px; color: #D9CFC2; }
   .contact-list div { margin-bottom: 10px; display: flex; gap: 10px; }
@@ -207,17 +254,51 @@
   footer { text-align: center; padding: 48px 6vw 56px; font-size: 14px; color: var(--walnut-soft); }
 
   @media (min-width: 861px) {
-    .logo-img { 
-      height: 56px; 
-    }
+    .logo-img { height: 56px; }
   }
 
+  /* --- Mobile Responsive Fixes --- */
   @media (max-width: 860px) {
-    .about { grid-template-columns: 1fr; }
-    .gallery-grid { grid-template-columns: repeat(2,1fr); }
+    section { padding: 70px 6vw; } /* Reduced giant gaps between sections */
+    
+    .menu-toggle { display: block; } /* Show hamburger */
+    
+    /* Full screen mobile menu overlay */
+    .nav-links { 
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100vh;
+      background: var(--cream);
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 40px;
+      font-size: 20px;
+      transform: translateY(-100%);
+      transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+      z-index: 100;
+    }
+    
+    .nav-links.active {
+      transform: translateY(0);
+    }
+
+    .hero { min-height: 85vh; padding-top: 120px; }
+    .hero-cta { width: 100%; flex-direction: column; gap: 12px; }
+    .hero-cta .btn { width: 100%; }
+    
+    .about { grid-template-columns: 1fr; gap: 40px; }
+    
     .process { grid-template-columns: 1fr; gap: 48px; }
-    .contact { grid-template-columns: 1fr; }
-    .nav-links { display: none; }
+    
+    .contact { grid-template-columns: 1fr; padding: 56px 6vw; gap: 40px;}
+  }
+
+  @media (max-width: 600px) {
+    .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  }
+
+  @media (max-width: 450px) {
+    .gallery-grid { grid-template-columns: 1fr; gap: 32px; } /* Single column for very small phones so pics aren't tiny */
   }
 </style>
 </head>
@@ -227,6 +308,9 @@
   <a href="#" class="logo" aria-label="Nicolette Crochets Home">
     <img src="assets/logo.jpg" alt="Nicolette Crochets logo" class="logo-img">
   </a>
+  <button class="menu-toggle" aria-label="Toggle mobile menu" aria-expanded="false">
+    <span class="hamburger"></span>
+  </button>
   <nav class="nav-links" aria-label="Main Navigation">
     <a href="#about">About</a>
     <a href="#gallery">Gallery</a>
@@ -239,7 +323,7 @@
   <section class="hero" id="home">
     <div class="hero-eyebrow">Handmade, one stitch at a time</div>
     <h1>Crocheting, <em>made with love</em></h1>
-    <p>Cozy pieces worked by hand — beanies, blankets, and wearables ready to wear, no two exactly alike.</p>
+    <p>Cozy pieces worked by hand — amigurumi, blankets, and wearables made to order, no two exactly alike.</p>
     <div class="hero-cta">
       <a href="#gallery" class="btn btn-primary">See the pieces</a>
       <a href="#contact" class="btn btn-ghost">Request a custom order</a>
@@ -293,7 +377,7 @@
       </div>
       <div class="piece reveal">
         <div class="piece-img">product photo</div>
-        <div class="piece-title">Baby set</div>
+        <div class="piece-title">Baby set, booties + hat</div>
         <div class="piece-price">$36</div>
       </div>
       <div class="piece reveal">
@@ -363,6 +447,7 @@
 </footer>
 
 <script>
+  // Scroll reveal logic
   const revealEls = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -373,6 +458,32 @@
     });
   }, { threshold: 0.15 });
   revealEls.forEach(el => observer.observe(el));
+
+  // Mobile menu logic
+  const menuToggle = document.querySelector('.menu-toggle');
+  const navLinks = document.querySelector('.nav-links');
+  const navItems = document.querySelectorAll('.nav-links a');
+
+  function toggleMenu() {
+    navLinks.classList.toggle('active');
+    menuToggle.classList.toggle('menu-open');
+    const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
+    menuToggle.setAttribute('aria-expanded', !isExpanded);
+    
+    // Prevent scrolling when menu is open
+    document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : 'auto';
+  }
+
+  menuToggle.addEventListener('click', toggleMenu);
+
+  // Close menu when a link is clicked
+  navItems.forEach(item => {
+    item.addEventListener('click', () => {
+      if (navLinks.classList.contains('active')) {
+        toggleMenu();
+      }
+    });
+  });
 </script>
 
 </body>
