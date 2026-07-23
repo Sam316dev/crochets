@@ -3,356 +3,360 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Nicolette Crochets - Handmade crochet, amigurumi, blankets, and wearables made to order.">
 <title>Nicolette Crochets — Handmade Crochet</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;0,600;1,400&family=Work+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --cream:#F7F2E9;
-    --sage:#A9B79C;
-    --sage-dark:#5F6E52;
-    --clay:#C77B58;
-    --walnut:#4A3F35;
-    --walnut-soft:#6B5D4F;
-    --thread:#D8CBB4;
+  :root {
+    --cream: #F7F2E9;
+    --sage: #A9B79C;
+    --sage-dark: #5F6E52;
+    --clay: #C77B58;
+    --walnut: #4A3F35;
+    --walnut-soft: #6B5D4F;
+    --thread: #D8CBB4;
   }
-  *{box-sizing:border-box; margin:0; padding:0;}
-  html{scroll-behavior:smooth;}
-  body{
-    background:var(--cream);
-    color:var(--walnut);
-    font-family:'Work Sans', sans-serif;
-    font-weight:400;
-    line-height:1.6;
-    overflow-x:hidden;
+  
+  /* ---------- Global Reset & Basics ---------- */
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--cream);
+    color: var(--walnut);
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 400;
+    line-height: 1.6;
+    overflow-x: hidden;
   }
-  h1,h2,h3{
-    font-family:'Fraunces', serif;
-    font-weight:500;
-    letter-spacing:-0.01em;
+  h1, h2, h3 {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    letter-spacing: -0.01em;
   }
-  a{color:inherit; text-decoration:none;}
-  img{max-width:100%; display:block;}
-
-  /* ---------- reveal on scroll ---------- */
-  .reveal{
-    opacity:0;
-    transform:translateY(24px);
-    transition:opacity 0.9s ease, transform 0.9s ease;
-  }
-  .reveal.visible{
-    opacity:1;
-    transform:translateY(0);
-  }
-  @media (prefers-reduced-motion: reduce){
-    .reveal{opacity:1; transform:none; transition:none;}
-    html{scroll-behavior:auto;}
+  a { color: inherit; text-decoration: none; }
+  img { max-width: 100%; display: block; }
+  
+  /* Image Utility Class (Replaces inline styles) */
+  .img-cover {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 
-  /* ---------- nav ---------- */
-  nav{
-    position:fixed; top:0; left:0; right:0;
-    display:flex; justify-content:space-between; align-items:center;
-    padding:24px 6vw;
-    z-index:100;
-    background:linear-gradient(to bottom, rgba(247,242,233,0.95), rgba(247,242,233,0));
+  /* ---------- Reveal on Scroll ---------- */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.9s ease, transform 0.9s ease;
   }
-  .logo{font-family:'Fraunces', serif; font-size:22px; font-weight:600; color:var(--walnut);}
-  .logo span{color:var(--clay); font-style:italic;}
-  .nav-links{display:flex; gap:36px; font-size:14px; letter-spacing:0.03em;}
-  .nav-links a{position:relative; padding-bottom:4px;}
-  .nav-links a::after{
-    content:''; position:absolute; bottom:0; left:0; width:0; height:1px;
-    background:var(--clay); transition:width 0.3s ease;
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
   }
-  .nav-links a:hover::after{width:100%;}
-
-  /* ---------- hero ---------- */
-  .hero{
-    min-height:100vh;
-    display:flex; flex-direction:column; align-items:center; justify-content:center;
-    text-align:center;
-    padding:0 6vw;
-    position:relative;
-  }
-  .hero-eyebrow{
-    font-size:13px; letter-spacing:0.15em; text-transform:uppercase;
-    color:var(--sage-dark); margin-bottom:20px;
-    opacity:0; animation:fadeIn 1s ease 0.2s forwards;
-  }
-  .hero h1{
-    font-size:clamp(40px, 7vw, 76px);
-    line-height:1.05;
-    max-width:900px;
-    opacity:0; animation:fadeIn 1.1s ease 0.4s forwards;
-  }
-  .hero h1 em{
-    font-style:italic; color:var(--clay);
-  }
-  .hero p{
-    margin-top:24px; font-size:18px; color:var(--walnut-soft); max-width:480px;
-    opacity:0; animation:fadeIn 1.1s ease 0.7s forwards;
-  }
-  .hero-cta{
-    margin-top:40px; display:flex; gap:16px;
-    opacity:0; animation:fadeIn 1.1s ease 1s forwards;
-  }
-  @keyframes fadeIn{
-    from{opacity:0; transform:translateY(16px);}
-    to{opacity:1; transform:translateY(0);}
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; transition: none; }
+    html { scroll-behavior: auto; }
   }
 
-  .btn{
-    display:inline-block; padding:14px 32px; border-radius:100px;
-    font-size:14px; letter-spacing:0.02em; transition:all 0.25s ease;
+  /* ---------- Nav ---------- */
+  header {
+    position: fixed; top: 0; left: 0; right: 0;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 24px 6vw;
+    z-index: 100;
+    background: linear-gradient(to bottom, rgba(247,242,233,0.95), rgba(247,242,233,0));
   }
-  .btn-primary{
-    background:var(--walnut); color:var(--cream);
+  .logo { font-family: 'Fraunces', serif; font-size: 22px; font-weight: 600; color: var(--walnut); }
+  .logo-img { height: 44px; width: auto; border-radius: 8px; }
+  .logo span { color: var(--clay); font-style: italic; }
+  .nav-links { display: flex; gap: 36px; font-size: 14px; letter-spacing: 0.03em; }
+  .nav-links a { position: relative; padding-bottom: 4px; }
+  .nav-links a::after {
+    content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 1px;
+    background: var(--clay); transition: width 0.3s ease;
   }
-  .btn-primary:hover{background:var(--clay); transform:translateY(-2px);}
-  .btn-ghost{
-    border:1px solid var(--walnut-soft);
-  }
-  .btn-ghost:hover{background:var(--walnut); color:var(--cream); border-color:var(--walnut);}
+  .nav-links a:hover::after, .nav-links a:focus::after { width: 100%; outline: none;}
 
-  /* yarn squiggle signature element */
-  .thread-divider{
-    width:140px; height:32px; margin:0 auto;
+  /* ---------- Hero ---------- */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center; padding: 0 6vw; position: relative;
   }
-
-  /* ---------- section shared ---------- */
-  section{padding:110px 6vw;}
-  .section-head{text-align:center; max-width:600px; margin:0 auto 64px;}
-  .section-eyebrow{
-    font-size:13px; letter-spacing:0.15em; text-transform:uppercase; color:var(--sage-dark); margin-bottom:16px;
+  .hero-eyebrow {
+    font-size: 13px; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--sage-dark); margin-bottom: 20px;
+    opacity: 0; animation: fadeIn 1s ease 0.2s forwards;
   }
-  .section-head h2{font-size:clamp(30px, 4vw, 44px);}
-
-  /* ---------- about ---------- */
-  .about{
-    display:grid; grid-template-columns:1fr 1.1fr; gap:64px; align-items:center;
-    max-width:1100px; margin:0 auto;
+  .hero h1 {
+    font-size: clamp(40px, 7vw, 76px); line-height: 1.05; max-width: 900px;
+    opacity: 0; animation: fadeIn 1.1s ease 0.4s forwards;
   }
-  .about-img{
-    aspect-ratio:4/5; border-radius:16px; background:var(--thread);
-    display:flex; align-items:center; justify-content:center;
-    color:var(--walnut-soft); font-size:14px; letter-spacing:0.05em;
-    position:relative; overflow:hidden;
+  .hero h1 em { font-style: italic; color: var(--clay); }
+  .hero p {
+    margin-top: 24px; font-size: 18px; color: var(--walnut-soft); max-width: 480px;
+    opacity: 0; animation: fadeIn 1.1s ease 0.7s forwards;
   }
-  .about-img::before{
-    content:''; position:absolute; inset:0;
-    background:repeating-linear-gradient(45deg, transparent, transparent 12px, rgba(74,63,53,0.05) 12px, rgba(74,63,53,0.05) 13px);
+  .hero-cta {
+    margin-top: 40px; display: flex; gap: 16px;
+    opacity: 0; animation: fadeIn 1.1s ease 1s forwards;
   }
-  .about-img.has-photo::before{content:none;}
-  .piece-img.has-photo::before{content:none;}
-  .about h3{font-size:30px; margin-bottom:20px;}
-  .about p{color:var(--walnut-soft); margin-bottom:16px; max-width:460px;}
-  .about-signature{
-    margin-top:24px; font-family:'Fraunces', serif; font-style:italic; font-size:20px; color:var(--clay);
-  }
-
-  /* ---------- gallery ---------- */
-  .gallery{max-width:1200px; margin:0 auto;}
-  .gallery-grid{
-    display:grid; grid-template-columns:repeat(3, 1fr); gap:28px;
-  }
-  .piece{
-    cursor:default;
-  }
-  .piece-img{
-    aspect-ratio:1; border-radius:14px; background:var(--thread);
-    position:relative; overflow:hidden;
-    display:flex; align-items:center; justify-content:center;
-    color:var(--walnut-soft); font-size:13px;
-    transition:transform 0.5s ease;
-  }
-  .piece-img::before{
-    content:''; position:absolute; inset:0;
-    background:repeating-linear-gradient(-45deg, transparent, transparent 10px, rgba(74,63,53,0.05) 10px, rgba(74,63,53,0.05) 11px);
-  }
-  .piece:hover .piece-img{transform:scale(1.03);}
-  .piece-title{margin-top:16px; font-size:17px; font-weight:500; font-family:'Fraunces', serif;}
-  .piece-price{margin-top:4px; font-size:14px; color:var(--walnut-soft);}
-
-  /* ---------- process ---------- */
-  .process{
-    max-width:1000px; margin:0 auto;
-    display:grid; grid-template-columns:repeat(3, 1fr); gap:40px;
-  }
-  .process-step{text-align:center; padding:0 12px;}
-  .process-icon{
-    width:64px; height:64px; border-radius:50%; background:var(--sage);
-    margin:0 auto 24px; display:flex; align-items:center; justify-content:center;
-    color:var(--cream); font-family:'Fraunces', serif; font-size:22px; font-style:italic;
-  }
-  .process-step h3{font-size:19px; margin-bottom:10px;}
-  .process-step p{font-size:15px; color:var(--walnut-soft);}
-
-  /* ---------- custom order / contact ---------- */
-  .contact{
-    background:var(--walnut); color:var(--cream); border-radius:24px;
-    max-width:1000px; margin:0 auto; padding:80px 6vw;
-    display:grid; grid-template-columns:1fr 1fr; gap:56px;
-  }
-  .contact h2{color:var(--cream); font-size:clamp(28px,3.5vw,38px); margin-bottom:16px;}
-  .contact p{color:#D9CFC2; max-width:380px; margin-bottom:8px;}
-  .contact-list{margin-top:28px; font-size:15px; color:#D9CFC2;}
-  .contact-list div{margin-bottom:10px; display:flex; gap:10px;}
-
-  form{display:flex; flex-direction:column; gap:16px;}
-  label{font-size:13px; letter-spacing:0.04em; color:#D9CFC2; margin-bottom:6px; display:block;}
-  input, textarea{
-    width:100%; background:rgba(247,242,233,0.08); border:1px solid rgba(247,242,233,0.25);
-    border-radius:10px; padding:12px 14px; color:var(--cream); font-family:'Work Sans', sans-serif; font-size:15px;
-  }
-  input::placeholder, textarea::placeholder{color:#B7ACA0;}
-  textarea{resize:vertical; min-height:100px;}
-  .contact form .btn-primary{
-    background:var(--clay); color:var(--cream); border:none; cursor:pointer; margin-top:6px;
-  }
-  .contact form .btn-primary:hover{background:#E0966D;}
-
-  /* ---------- footer ---------- */
-  footer{
-    text-align:center; padding:48px 6vw 56px; font-size:14px; color:var(--walnut-soft);
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
   }
 
-  @media (max-width: 860px){
-    .about{grid-template-columns:1fr;}
-    .gallery-grid{grid-template-columns:repeat(2,1fr);}
-    .process{grid-template-columns:1fr; gap:48px;}
-    .contact{grid-template-columns:1fr;}
-    .nav-links{display:none;}
+  /* Buttons */
+  .btn {
+    display: inline-block; padding: 14px 32px; border-radius: 100px;
+    font-size: 14px; letter-spacing: 0.02em; transition: all 0.25s ease;
+  }
+  .btn-primary { background: var(--walnut); color: var(--cream); }
+  .btn-primary:hover, .btn-primary:focus { background: var(--clay); transform: translateY(-2px); outline: none;}
+  .btn-ghost { border: 1px solid var(--walnut-soft); }
+  .btn-ghost:hover, .btn-ghost:focus { background: var(--walnut); color: var(--cream); border-color: var(--walnut); outline: none;}
+
+  /* ---------- Section Shared ---------- */
+  section { padding: 110px 6vw; }
+  .section-head { text-align: center; max-width: 600px; margin: 0 auto 64px; }
+  .section-eyebrow {
+    font-size: 13px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--sage-dark); margin-bottom: 16px;
+  }
+  .section-head h2 { font-size: clamp(30px, 4vw, 44px); }
+
+  /* ---------- About ---------- */
+  .about {
+    display: grid; grid-template-columns: 1fr 1.1fr; gap: 64px; align-items: center;
+    max-width: 1100px; margin: 0 auto;
+  }
+  .about-img {
+    aspect-ratio: 4/5; border-radius: 16px; background: var(--thread);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--walnut-soft); font-size: 14px; letter-spacing: 0.05em;
+    position: relative; overflow: hidden;
+  }
+  .about-img::before {
+    content: ''; position: absolute; inset: 0;
+    background: repeating-linear-gradient(45deg, transparent, transparent 12px, rgba(74,63,53,0.05) 12px, rgba(74,63,53,0.05) 13px);
+  }
+  .about-img.has-photo::before { content: none; }
+  .piece-img.has-photo::before { content: none; }
+  .about h3 { font-size: 30px; margin-bottom: 20px; }
+  .about p { color: var(--walnut-soft); margin-bottom: 16px; max-width: 460px; }
+  .about-signature {
+    margin-top: 24px; font-family: 'Fraunces', serif; font-style: italic; font-size: 20px; color: var(--clay);
+  }
+
+  /* ---------- Gallery ---------- */
+  .gallery { max-width: 1200px; margin: 0 auto; }
+  .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+  .piece { cursor: default; }
+  .piece-img {
+    aspect-ratio: 1; border-radius: 14px; background: var(--thread);
+    position: relative; overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--walnut-soft); font-size: 13px;
+    transition: transform 0.5s ease;
+  }
+  .piece-img::before {
+    content: ''; position: absolute; inset: 0;
+    background: repeating-linear-gradient(-45deg, transparent, transparent 10px, rgba(74,63,53,0.05) 10px, rgba(74,63,53,0.05) 11px);
+  }
+  .piece:hover .piece-img { transform: scale(1.03); }
+  .piece-img img { border-radius: inherit; }
+  .piece-title { margin-top: 16px; font-size: 17px; font-weight: 500; font-family: 'Fraunces', serif; }
+  .piece-price { margin-top: 4px; font-size: 14px; color: var(--walnut-soft); }
+
+  /* ---------- Process ---------- */
+  .process {
+    max-width: 1000px; margin: 0 auto;
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px;
+  }
+  .process-step { text-align: center; padding: 0 12px; }
+  .process-icon {
+    width: 64px; height: 64px; border-radius: 50%; background: var(--sage);
+    margin: 0 auto 24px; display: flex; align-items: center; justify-content: center;
+    color: var(--cream); font-family: 'Fraunces', serif; font-size: 22px; font-style: italic;
+  }
+  .process-step h3 { font-size: 19px; margin-bottom: 10px; }
+  .process-step p { font-size: 15px; color: var(--walnut-soft); }
+
+  /* ---------- Custom Order / Contact ---------- */
+  .contact {
+    background: var(--walnut); color: var(--cream); border-radius: 24px;
+    max-width: 1000px; margin: 0 auto; padding: 80px 6vw;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 56px;
+  }
+  .contact h2 { color: var(--cream); font-size: clamp(28px,3.5vw,38px); margin-bottom: 16px; }
+  .contact p { color: #D9CFC2; max-width: 380px; margin-bottom: 8px; }
+  .contact-list { margin-top: 28px; font-size: 15px; color: #D9CFC2; }
+  .contact-list div { margin-bottom: 10px; display: flex; gap: 10px; }
+
+  form { display: flex; flex-direction: column; gap: 16px; }
+  label { font-size: 13px; letter-spacing: 0.04em; color: #D9CFC2; margin-bottom: 6px; display: block; }
+  input, textarea {
+    width: 100%; background: rgba(247,242,233,0.08); border: 1px solid rgba(247,242,233,0.25);
+    border-radius: 10px; padding: 12px 14px; color: var(--cream); font-family: 'Work Sans', sans-serif; font-size: 15px;
+    transition: border-color 0.3s ease;
+  }
+  input:focus, textarea:focus { outline: none; border-color: var(--clay); }
+  input::placeholder, textarea::placeholder { color: #c4b9ad; }
+  textarea { resize: vertical; min-height: 100px; }
+  .contact form .btn-primary {
+    background: var(--clay); color: var(--cream); border: none; cursor: pointer; margin-top: 6px;
+  }
+  .contact form .btn-primary:hover, .contact form .btn-primary:focus { background: #E0966D; }
+
+  /* ---------- Footer ---------- */
+  footer { text-align: center; padding: 48px 6vw 56px; font-size: 14px; color: var(--walnut-soft); }
+
+  @media (max-width: 860px) {
+    .about { grid-template-columns: 1fr; }
+    .gallery-grid { grid-template-columns: repeat(2,1fr); }
+    .process { grid-template-columns: 1fr; gap: 48px; }
+    .contact { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
   }
 </style>
 </head>
 <body>
 
-<nav>
-  <div class="logo"><img src="assets/logo.jpg" alt="Nicolette Crochets logo" style="height:44px; width:auto; border-radius:8px;"></div>
-  <div class="nav-links">
+<header>
+  <a href="#" class="logo" aria-label="Nicolette Crochets Home">
+    <img src="assets/logo.jpg" alt="Nicolette Crochets logo" class="logo-img">
+  </a>
+  <nav class="nav-links" aria-label="Main Navigation">
     <a href="#about">About</a>
     <a href="#gallery">Gallery</a>
     <a href="#process">How it works</a>
     <a href="#contact">Custom order</a>
-  </div>
-</nav>
+  </nav>
+</header>
 
-<section class="hero">
-  <div class="hero-eyebrow">Handmade, one stitch at a time</div>
-  <h1>Crochet made slow, <em>made with heart</em></h1>
-  <p>Cozy pieces worked by hand — amigurumi, blankets, and wearables made to order, no two exactly alike.</p>
-  <div class="hero-cta">
-    <a href="#gallery" class="btn btn-primary">See the pieces</a>
-    <a href="#contact" class="btn btn-ghost">Request a custom order</a>
-  </div>
-</section>
+<main>
+  <section class="hero" id="home">
+    <div class="hero-eyebrow">Handmade, one stitch at a time</div>
+    <h1>Crochet made slow, <em>made with heart</em></h1>
+    <p>Cozy pieces worked by hand — amigurumi, blankets, and wearables made to order, no two exactly alike.</p>
+    <div class="hero-cta">
+      <a href="#gallery" class="btn btn-primary">See the pieces</a>
+      <a href="#contact" class="btn btn-ghost">Request a custom order</a>
+    </div>
+  </section>
 
-<section id="about">
-  <div class="about">
-    <div class="about-img has-photo reveal"><img src="assets/nicolette-modeling.jpg" alt="Nicolette wearing a handmade crochet bucket hat" style="width:100%; height:100%; object-fit:cover; border-radius:16px;"></div>
-    <div class="reveal">
-      <div class="section-eyebrow">The maker</div>
-      <h3>Every piece starts as a single ball of yarn</h3>
-      <p>Hi, I'm Oluwatoyosi — I've been crocheting for [X] years, turning quiet evenings into blankets, plushies, and wearable pieces. Everything here is made by hand, in small batches, using yarn I actually love working with.</p>
-      <p>No two pieces come out exactly the same, and that's the part I like best.</p>
-      <div class="about-signature">— stitched with care</div>
-    </div>
-  </div>
-</section>
-
-<section id="gallery">
-  <div class="section-head reveal">
-    <div class="section-eyebrow">The shop</div>
-    <h2>Recent favorites</h2>
-  </div>
-  <div class="gallery gallery-grid">
-    <div class="piece reveal">
-      <div class="piece-img has-photo"><img src="assets/beanie.jpg" alt="Handmade grey ribbed beanie" style="width:100%; height:100%; object-fit:cover; border-radius:14px;"></div>
-      <div class="piece-title">Ribbed knit beanie</div>
-      <div class="piece-price">$25</div>
-    </div>
-    <div class="piece reveal">
-      <div class="piece-img">product photo</div>
-      <div class="piece-title">Little fox amigurumi</div>
-      <div class="piece-price">$28</div>
-    </div>
-    <div class="piece reveal">
-      <div class="piece-img has-photo"><img src="assets/ruffle-dress.jpg" alt="Handmade tiered ruffle baby dress" style="width:100%; height:100%; object-fit:cover; border-radius:14px;"></div>
-      <div class="piece-title">Tiered ruffle baby dress</div>
-      <div class="piece-price">$60</div>
-    </div>
-    <div class="piece reveal">
-      <div class="piece-img">product photo</div>
-      <div class="piece-title">Market tote bag</div>
-      <div class="piece-price">$42</div>
-    </div>
-    <div class="piece reveal">
-      <div class="piece-img">product photo</div>
-      <div class="piece-title">Baby set, booties + hat</div>
-      <div class="piece-price">$36</div>
-    </div>
-    <div class="piece reveal">
-      <div class="piece-img">product photo</div>
-      <div class="piece-title">Textured cushion cover</div>
-      <div class="piece-price">$32</div>
-    </div>
-  </div>
-</section>
-
-<section id="process">
-  <div class="section-head reveal">
-    <div class="section-eyebrow">Custom orders</div>
-    <h2>How a commission comes together</h2>
-  </div>
-  <div class="process">
-    <div class="process-step reveal">
-      <div class="process-icon">1</div>
-      <h3>Tell me your idea</h3>
-      <p>Send a message with what you're picturing — colors, size, occasion. Reference photos welcome.</p>
-    </div>
-    <div class="process-step reveal">
-      <div class="process-icon">2</div>
-      <h3>We settle the details</h3>
-      <p>I'll follow up with yarn options, timeline, and a price before anything gets started.</p>
-    </div>
-    <div class="process-step reveal">
-      <div class="process-icon">3</div>
-      <h3>It's made by hand</h3>
-      <p>Most pieces take 1-3 weeks depending on size. You'll get progress photos along the way.</p>
-    </div>
-  </div>
-</section>
-
-<section id="contact">
-  <div class="contact reveal">
-    <div>
-      <h2>Have something in mind?</h2>
-      <p>Tell me what you're picturing and I'll get back to you within a couple of days with pricing and timing.</p>
-      <div class="contact-list">
-        <div>Instagram — @nicolettecrochets</div>
-        <div>Email — hello@nicolettecrochets.com</div>
-        <div>Based in [city] — ships worldwide</div>
+  <section id="about">
+    <div class="about">
+      <div class="about-img has-photo reveal">
+        <img src="assets/nicolette-modeling.jpg" alt="Nicolette wearing a handmade crochet bucket hat" class="img-cover">
+      </div>
+      <div class="reveal">
+        <div class="section-eyebrow">The maker</div>
+        <h3>Every piece starts as a single ball of yarn</h3>
+        <p>Hi, I'm Oluwatoyosi — I've been crocheting for [X] years, turning quiet evenings into blankets, plushies, and wearable pieces. Everything here is made by hand, in small batches, using yarn I actually love working with.</p>
+        <p>No two pieces come out exactly the same, and that's the part I like best.</p>
+        <div class="about-signature">— stitched with care</div>
       </div>
     </div>
-    <form>
+  </section>
+
+  <section id="gallery">
+    <div class="section-head reveal">
+      <div class="section-eyebrow">The shop</div>
+      <h2>Recent favorites</h2>
+    </div>
+    <div class="gallery gallery-grid">
+      <div class="piece reveal">
+        <div class="piece-img has-photo">
+          <img src="assets/beanie.jpg" alt="Handmade grey ribbed beanie" class="img-cover">
+        </div>
+        <div class="piece-title">Ribbed knit beanie</div>
+        <div class="piece-price">$25</div>
+      </div>
+      <div class="piece reveal">
+        <div class="piece-img">product photo</div>
+        <div class="piece-title">Little fox amigurumi</div>
+        <div class="piece-price">$28</div>
+      </div>
+      <div class="piece reveal">
+        <div class="piece-img has-photo">
+          <img src="assets/ruffle-dress.jpg" alt="Handmade tiered ruffle baby dress" class="img-cover">
+        </div>
+        <div class="piece-title">Tiered ruffle baby dress</div>
+        <div class="piece-price">$60</div>
+      </div>
+      <div class="piece reveal">
+        <div class="piece-img">product photo</div>
+        <div class="piece-title">Market tote bag</div>
+        <div class="piece-price">$42</div>
+      </div>
+      <div class="piece reveal">
+        <div class="piece-img">product photo</div>
+        <div class="piece-title">Baby set, booties + hat</div>
+        <div class="piece-price">$36</div>
+      </div>
+      <div class="piece reveal">
+        <div class="piece-img">product photo</div>
+        <div class="piece-title">Textured cushion cover</div>
+        <div class="piece-price">$32</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="process">
+    <div class="section-head reveal">
+      <div class="section-eyebrow">Custom orders</div>
+      <h2>How a commission comes together</h2>
+    </div>
+    <div class="process">
+      <div class="process-step reveal">
+        <div class="process-icon">1</div>
+        <h3>Tell me your idea</h3>
+        <p>Send a message with what you're picturing — colors, size, occasion. Reference photos welcome.</p>
+      </div>
+      <div class="process-step reveal">
+        <div class="process-icon">2</div>
+        <h3>We settle the details</h3>
+        <p>I'll follow up with yarn options, timeline, and a price before anything gets started.</p>
+      </div>
+      <div class="process-step reveal">
+        <div class="process-icon">3</div>
+        <h3>It's made by hand</h3>
+        <p>Most pieces take 1-3 weeks depending on size. You'll get progress photos along the way.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="contact reveal">
       <div>
-        <label for="name">Name</label>
-        <input id="name" type="text" placeholder="Your name">
+        <h2>Have something in mind?</h2>
+        <p>Tell me what you're picturing and I'll get back to you within a couple of days with pricing and timing.</p>
+        <div class="contact-list">
+          <div>Instagram — @nicolettecrochets</div>
+          <div>Email — hello@nicolettecrochets.com</div>
+          <div>Based in [city] — ships worldwide</div>
+        </div>
       </div>
-      <div>
-        <label for="email">Email</label>
-        <input id="email" type="email" placeholder="name@email.com">
-      </div>
-      <div>
-        <label for="details">What are you picturing?</label>
-        <textarea id="details" placeholder="Colors, size, occasion, deadline..."></textarea>
-      </div>
-      <button type="submit" class="btn btn-primary">Send request</button>
-    </form>
-  </div>
-</section>
+      <form action="/submit-form" method="POST">
+        <div>
+          <label for="name">Name</label>
+          <input id="name" name="name" type="text" placeholder="Your name" required>
+        </div>
+        <div>
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" placeholder="name@email.com" required>
+        </div>
+        <div>
+          <label for="details">What are you picturing?</label>
+          <textarea id="details" name="details" placeholder="Colors, size, occasion, deadline..." required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Send request</button>
+      </form>
+    </div>
+  </section>
+</main>
 
 <footer>
   Nicolette Crochets — handmade crochet, made to order
@@ -362,7 +366,7 @@
   const revealEls = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-      if(entry.isIntersecting){
+      if (entry.isIntersecting) {
         entry.target.classList.add('visible');
         observer.unobserve(entry.target);
       }
