@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Nicolette Crochets - Handmade crochet, amigurumi, blankets, and wearables made to order.">
+<meta name="description" content="Nicolette Crochets - Crocheting, made with love. Handmade beanies, blankets, and wearables ready to wear.">
 <title>Nicolette Crochets — Handmade Crochet</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,7 +19,6 @@
     --thread: #D8CBB4;
   }
   
-  /* ---------- Global Reset & Basics ---------- */
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
   body {
@@ -38,14 +37,12 @@
   a { color: inherit; text-decoration: none; }
   img { max-width: 100%; display: block; }
   
-  /* Image Utility Class */
   .img-cover {
     width: 100%;
     height: 100%;
     object-fit: cover;
   }
 
-  /* ---------- Reveal on Scroll ---------- */
   .reveal {
     opacity: 0;
     transform: translateY(24px);
@@ -60,7 +57,6 @@
     html { scroll-behavior: auto; }
   }
 
-  /* ---------- Nav ---------- */
   header {
     position: fixed; top: 0; left: 0; right: 0;
     display: flex; justify-content: space-between; align-items: center;
@@ -70,7 +66,6 @@
   }
   .logo { font-family: 'Fraunces', serif; font-size: 22px; font-weight: 600; color: var(--walnut); }
   
-  /* Default logo size for mobile */
   .logo-img { 
     height: 40px; 
     width: auto; 
@@ -86,7 +81,6 @@
   }
   .nav-links a:hover::after, .nav-links a:focus::after { width: 100%; outline: none;}
 
-  /* ---------- Hero ---------- */
   .hero {
     min-height: 100vh;
     display: flex; flex-direction: column; align-items: center; justify-content: center;
@@ -115,7 +109,6 @@
     to { opacity: 1; transform: translateY(0); }
   }
 
-  /* Buttons */
   .btn {
     display: inline-block; padding: 14px 32px; border-radius: 100px;
     font-size: 14px; letter-spacing: 0.02em; transition: all 0.25s ease;
@@ -125,7 +118,6 @@
   .btn-ghost { border: 1px solid var(--walnut-soft); }
   .btn-ghost:hover, .btn-ghost:focus { background: var(--walnut); color: var(--cream); border-color: var(--walnut); outline: none;}
 
-  /* ---------- Section Shared ---------- */
   section { padding: 110px 6vw; }
   .section-head { text-align: center; max-width: 600px; margin: 0 auto 64px; }
   .section-eyebrow {
@@ -133,7 +125,6 @@
   }
   .section-head h2 { font-size: clamp(30px, 4vw, 44px); }
 
-  /* ---------- About ---------- */
   .about {
     display: grid; grid-template-columns: 1fr 1.1fr; gap: 64px; align-items: center;
     max-width: 1100px; margin: 0 auto;
@@ -156,7 +147,6 @@
     margin-top: 24px; font-family: 'Fraunces', serif; font-style: italic; font-size: 20px; color: var(--clay);
   }
 
-  /* ---------- Gallery ---------- */
   .gallery { max-width: 1200px; margin: 0 auto; }
   .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
   .piece { cursor: default; }
@@ -176,7 +166,6 @@
   .piece-title { margin-top: 16px; font-size: 17px; font-weight: 500; font-family: 'Fraunces', serif; }
   .piece-price { margin-top: 4px; font-size: 14px; color: var(--walnut-soft); }
 
-  /* ---------- Process ---------- */
   .process {
     max-width: 1000px; margin: 0 auto;
     display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px;
@@ -190,7 +179,6 @@
   .process-step h3 { font-size: 19px; margin-bottom: 10px; }
   .process-step p { font-size: 15px; color: var(--walnut-soft); }
 
-  /* ---------- Custom Order / Contact ---------- */
   .contact {
     background: var(--walnut); color: var(--cream); border-radius: 24px;
     max-width: 1000px; margin: 0 auto; padding: 80px 6vw;
@@ -216,10 +204,8 @@
   }
   .contact form .btn-primary:hover, .contact form .btn-primary:focus { background: #E0966D; }
 
-  /* ---------- Footer ---------- */
   footer { text-align: center; padding: 48px 6vw 56px; font-size: 14px; color: var(--walnut-soft); }
 
-  /* Desktop Logo Resize and Mobile Breakpoints */
   @media (min-width: 861px) {
     .logo-img { 
       height: 56px; 
@@ -253,7 +239,7 @@
   <section class="hero" id="home">
     <div class="hero-eyebrow">Handmade, one stitch at a time</div>
     <h1>Crocheting, <em>made with love</em></h1>
-    <p>Cozy pieces worked by hand — beanies, blankets, and wearables made to order, no two exactly alike.</p>
+    <p>Cozy pieces worked by hand — beanies, blankets, and wearables ready to wear, no two exactly alike.</p>
     <div class="hero-cta">
       <a href="#gallery" class="btn btn-primary">See the pieces</a>
       <a href="#contact" class="btn btn-ghost">Request a custom order</a>
@@ -307,7 +293,7 @@
       </div>
       <div class="piece reveal">
         <div class="piece-img">product photo</div>
-        <div class="piece-title">Baby set, booties + hat</div>
+        <div class="piece-title">Baby set</div>
         <div class="piece-price">$36</div>
       </div>
       <div class="piece reveal">
@@ -350,7 +336,7 @@
         <div class="contact-list">
           <div>Instagram — @nicolettecrochets</div>
           <div>Email — hello@nicolettecrochets.com</div>
-          <div>Based in [city] — ships worldwide</div>
+          <div>Based in Lagos — ships worldwide</div>
         </div>
       </div>
       <form action="/submit-form" method="POST">
@@ -373,7 +359,7 @@
 </main>
 
 <footer>
-  Nicolette Crochets — handmade crochet, ready to wear
+  Nicolette Crochets — Crocheting, made with love
 </footer>
 
 <script>
