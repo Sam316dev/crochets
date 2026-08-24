@@ -212,6 +212,68 @@
   .piece-img img { border-radius: inherit; }
   .piece-title { margin-top: 16px; font-size: 17px; font-weight: 500; font-family: 'Fraunces', serif; }
   .piece-price { margin-top: 4px; font-size: 14px; color: var(--walnut-soft); }
+  .piece-description { margin-top: 6px; font-size: 14px; color: var(--walnut-soft); }
+
+  .owner-upload {
+    max-width: 900px;
+    margin: 0 auto;
+    background: var(--thread);
+    border-radius: 20px;
+    padding: 40px;
+  }
+  .owner-upload .section-head { margin-bottom: 28px; }
+  .owner-upload .section-head h2 { font-size: clamp(24px, 5vw, 34px); }
+  .owner-upload .section-head p {
+    margin-top: 12px;
+    font-size: 15px;
+    color: var(--walnut-soft);
+  }
+  .owner-upload form { gap: 14px; }
+  .owner-upload label {
+    color: var(--walnut-soft);
+    font-weight: 500;
+    letter-spacing: 0.03em;
+  }
+  .owner-upload input,
+  .owner-upload textarea {
+    background: var(--cream);
+    border: 1px solid rgba(74, 61, 88, 0.25);
+    color: var(--walnut);
+  }
+  .owner-upload input::placeholder,
+  .owner-upload textarea::placeholder { color: #8f819e; }
+  .owner-upload input:focus,
+  .owner-upload textarea:focus { border-color: var(--sage-dark); }
+  .owner-upload input[type="file"] { padding: 10px; cursor: pointer; }
+  .upload-preview {
+    width: 100%;
+    max-width: 260px;
+    aspect-ratio: 1;
+    border-radius: 12px;
+    border: 1px dashed rgba(74, 61, 88, 0.35);
+    background: var(--cream);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--walnut-soft);
+    font-size: 13px;
+    overflow: hidden;
+  }
+  .upload-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .storage-note {
+    font-size: 13px;
+    color: var(--walnut-soft);
+  }
+  .upload-feedback {
+    min-height: 22px;
+    font-size: 14px;
+    color: var(--sage-dark);
+  }
+  .upload-feedback.error { color: #9A2540; }
 
   .process {
     max-width: 1000px; margin: 0 auto;
@@ -291,6 +353,7 @@
     .process { grid-template-columns: 1fr; gap: 48px; }
     
     .contact { grid-template-columns: 1fr; padding: 56px 6vw; gap: 40px;}
+    .owner-upload { padding: 28px 18px; }
   }
 
   @media (max-width: 600px) {
@@ -314,6 +377,7 @@
   <nav class="nav-links" aria-label="Main Navigation">
     <a href="#about">About</a>
     <a href="#gallery">Gallery</a>
+    <a href="#owner-upload">Owner upload</a>
     <a href="#process">How it works</a>
     <a href="#contact">Custom order</a>
   </nav>
@@ -350,41 +414,38 @@
       <div class="section-eyebrow">The shop</div>
       <h2>Recent favorites</h2>
     </div>
-    <div class="gallery gallery-grid">
-      <div class="piece reveal">
-        <div class="piece-img has-photo">
-          <img src="assets/beanie.jpg" alt="Handmade grey ribbed beanie" class="img-cover">
+    <div class="gallery gallery-grid" id="productGrid" aria-live="polite"></div>
+  </section>
+
+  <section id="owner-upload">
+    <div class="owner-upload reveal">
+      <div class="section-head">
+        <div class="section-eyebrow">Owner tools</div>
+        <h2>Add a new product</h2>
+        <p>Use this form to upload a product right from this page.</p>
+      </div>
+      <form id="productUploadForm" novalidate>
+        <div>
+          <label for="productName">Product name</label>
+          <input id="productName" name="productName" type="text" placeholder="e.g. Soft lavender beanie" required>
         </div>
-        <div class="piece-title">Ribbed knit beanie</div>
-        <div class="piece-price">$25</div>
-      </div>
-      <div class="piece reveal">
-        <div class="piece-img">product photo</div>
-        <div class="piece-title">Little fox amigurumi</div>
-        <div class="piece-price">$28</div>
-      </div>
-      <div class="piece reveal">
-        <div class="piece-img has-photo">
-          <img src="assets/ruffle-dress.jpg" alt="Handmade tiered ruffle baby dress" class="img-cover">
+        <div>
+          <label for="productPrice">Price (USD)</label>
+          <input id="productPrice" name="productPrice" type="number" min="0.01" step="0.01" placeholder="e.g. 35" required>
         </div>
-        <div class="piece-title">Tiered ruffle baby dress</div>
-        <div class="piece-price">$60</div>
-      </div>
-      <div class="piece reveal">
-        <div class="piece-img">product photo</div>
-        <div class="piece-title">Market tote bag</div>
-        <div class="piece-price">$42</div>
-      </div>
-      <div class="piece reveal">
-        <div class="piece-img">product photo</div>
-        <div class="piece-title">Baby set + hat</div>
-        <div class="piece-price">$36</div>
-      </div>
-      <div class="piece reveal">
-        <div class="piece-img">product photo</div>
-        <div class="piece-title">Textured cushion cover</div>
-        <div class="piece-price">$32</div>
-      </div>
+        <div>
+          <label for="productDescription">Description</label>
+          <textarea id="productDescription" name="productDescription" placeholder="Short details about yarn, size, colors..." required></textarea>
+        </div>
+        <div>
+          <label for="productImage">Product image</label>
+          <input id="productImage" name="productImage" type="file" accept="image/*" required>
+        </div>
+        <div class="upload-preview" id="imagePreview">Image preview</div>
+        <div class="storage-note">Saved in this browser via local storage. For multi-device publishing, add a backend or CMS.</div>
+        <div id="uploadFeedback" class="upload-feedback" role="status" aria-live="polite"></div>
+        <button type="submit" class="btn btn-primary">Add product</button>
+      </form>
     </div>
   </section>
 
@@ -447,8 +508,60 @@
 </footer>
 
 <script>
+  const PRODUCT_STORAGE_KEY = 'nicolette-crochets-products';
+  const seedProducts = [
+    {
+      name: 'Ribbed knit beanie',
+      price: 25,
+      description: 'Classic ribbed texture and soft stretch for everyday wear.',
+      image: 'assets/beanie.jpg',
+      alt: 'Handmade grey ribbed beanie'
+    },
+    {
+      name: 'Little fox amigurumi',
+      price: 28,
+      description: 'A playful handmade plush with carefully stitched details.',
+      image: '',
+      alt: ''
+    },
+    {
+      name: 'Tiered ruffle baby dress',
+      price: 60,
+      description: 'Layered dress for special moments, made from soft baby-safe yarn.',
+      image: 'assets/ruffle-dress.jpg',
+      alt: 'Handmade tiered ruffle baby dress'
+    },
+    {
+      name: 'Market tote bag',
+      price: 42,
+      description: 'Roomy and sturdy with a cozy handmade finish.',
+      image: '',
+      alt: ''
+    },
+    {
+      name: 'Baby set + hat',
+      price: 36,
+      description: 'Matching set designed for comfort and easy gifting.',
+      image: '',
+      alt: ''
+    },
+    {
+      name: 'Textured cushion cover',
+      price: 32,
+      description: 'Soft textured cover to warm up your living space.',
+      image: '',
+      alt: ''
+    }
+  ];
+
+  const productGrid = document.getElementById('productGrid');
+  const productUploadForm = document.getElementById('productUploadForm');
+  const productImageInput = document.getElementById('productImage');
+  const imagePreview = document.getElementById('imagePreview');
+  const uploadFeedback = document.getElementById('uploadFeedback');
+  let uploadedImageData = '';
+
   // Scroll reveal logic
-  const revealEls = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -457,7 +570,155 @@
       }
     });
   }, { threshold: 0.15 });
-  revealEls.forEach(el => observer.observe(el));
+
+  function observeRevealElements(elements) {
+    elements.forEach(el => observer.observe(el));
+  }
+
+  function getStoredProducts() {
+    try {
+      const stored = localStorage.getItem(PRODUCT_STORAGE_KEY);
+      if (!stored) return [];
+      const parsed = JSON.parse(stored);
+      return Array.isArray(parsed) ? parsed : [];
+    } catch (error) {
+      return [];
+    }
+  }
+
+  function saveStoredProducts(products) {
+    localStorage.setItem(PRODUCT_STORAGE_KEY, JSON.stringify(products));
+  }
+
+  function formatPrice(value) {
+    const numberValue = Number(value);
+    if (Number.isNaN(numberValue)) return '$0';
+    return `$${numberValue.toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 2 })}`;
+  }
+
+  function createProductCard(product) {
+    const card = document.createElement('div');
+    card.className = 'piece reveal';
+
+    const imageWrap = document.createElement('div');
+    imageWrap.className = 'piece-img';
+    if (product.image) {
+      imageWrap.classList.add('has-photo');
+      const image = document.createElement('img');
+      image.src = product.image;
+      image.alt = product.alt || `${product.name} product image`;
+      image.className = 'img-cover';
+      imageWrap.appendChild(image);
+    } else {
+      imageWrap.textContent = 'product photo';
+    }
+
+    const title = document.createElement('div');
+    title.className = 'piece-title';
+    title.textContent = product.name;
+
+    const price = document.createElement('div');
+    price.className = 'piece-price';
+    price.textContent = formatPrice(product.price);
+
+    const description = document.createElement('div');
+    description.className = 'piece-description';
+    description.textContent = product.description;
+
+    card.appendChild(imageWrap);
+    card.appendChild(title);
+    card.appendChild(price);
+    card.appendChild(description);
+    return card;
+  }
+
+  function renderProducts() {
+    const allProducts = [...seedProducts, ...getStoredProducts()];
+    productGrid.innerHTML = '';
+    allProducts.forEach(product => {
+      const card = createProductCard(product);
+      productGrid.appendChild(card);
+      observeRevealElements([card]);
+    });
+  }
+
+  function setUploadFeedback(message, isError = false) {
+    uploadFeedback.textContent = message;
+    uploadFeedback.classList.toggle('error', isError);
+  }
+
+  function resetPreview() {
+    imagePreview.textContent = 'Image preview';
+  }
+
+  productImageInput.addEventListener('change', (event) => {
+    const [file] = event.target.files;
+    uploadedImageData = '';
+    resetPreview();
+
+    if (!file) return;
+    if (!file.type.startsWith('image/')) {
+      setUploadFeedback('Please select a valid image file.', true);
+      productImageInput.value = '';
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      uploadedImageData = typeof reader.result === 'string' ? reader.result : '';
+      if (!uploadedImageData) return;
+      imagePreview.innerHTML = '';
+      const previewImage = document.createElement('img');
+      previewImage.src = uploadedImageData;
+      previewImage.alt = 'Selected product image preview';
+      imagePreview.appendChild(previewImage);
+      setUploadFeedback('');
+    };
+    reader.readAsDataURL(file);
+  });
+
+  productUploadForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const name = document.getElementById('productName').value.trim();
+    const priceValue = document.getElementById('productPrice').value.trim();
+    const description = document.getElementById('productDescription').value.trim();
+    const price = Number(priceValue);
+
+    if (!name || !description || !priceValue) {
+      setUploadFeedback('Please fill in product name, price, and description.', true);
+      return;
+    }
+    if (!Number.isFinite(price) || price <= 0) {
+      setUploadFeedback('Please enter a valid price greater than 0.', true);
+      return;
+    }
+    if (!uploadedImageData) {
+      setUploadFeedback('Please choose an image to upload.', true);
+      return;
+    }
+
+    try {
+      const storedProducts = getStoredProducts();
+      storedProducts.unshift({
+        name,
+        price,
+        description,
+        image: uploadedImageData,
+        alt: `${name} product image`
+      });
+      saveStoredProducts(storedProducts);
+      renderProducts();
+      productUploadForm.reset();
+      uploadedImageData = '';
+      resetPreview();
+      setUploadFeedback('Product added successfully.');
+    } catch (error) {
+      setUploadFeedback('Could not save product in this browser. Please try again.', true);
+    }
+  });
+
+  renderProducts();
+  observeRevealElements(Array.from(document.querySelectorAll('.reveal')));
 
   // Mobile menu logic
   const menuToggle = document.querySelector('.menu-toggle');
