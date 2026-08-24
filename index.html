@@ -346,7 +346,7 @@
       <div class="reveal">
         <div class="section-eyebrow">The maker</div>
         <h3>Every piece starts as a single ball of yarn</h3>
-       <p>Hi, I'm Oluwatoyosi. I picked up a crochet hook about 3 years ago just to have something to do with my evenings, and it kind of took over. Now most of my free time goes into turning yarn into beanies, plushies, baby sets, whatever I'm feeling that week.</p>
+       <p>Hi, I'm Nicolette. I picked up a crochet hook about 3 years ago just to have something to do with my evenings, and it kind of took over. Now most of my free time goes into turning yarn into beanies, plushies, baby sets, whatever I'm feeling that week.</p>
 <p>Everything here is made by hand, so no two pieces come out exactly alike. That's my favorite part. If you see something you like, or have an idea in your head, send me a message and let's make it real.</p>
         <div class="about-signature">— stitched to the tiniest detail</div>
       </div>
@@ -639,7 +639,7 @@
     const details = document.getElementById('details').value.trim();
 
     const message = `Hi, my name is ${name}.\n\nI'd like to place a custom order:\n${details}`;
-    const whatsappUrl = `https://wa.me/$+2349039401350?text=${encodeURIComponent(message)}`;
+    const whatsappUrl = `https://api.whatsapp.com/send?phone=2349039401350&text=${encodeURIComponent(message)}`;
 
     window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
   });
