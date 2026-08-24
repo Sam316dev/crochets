@@ -346,7 +346,7 @@
       <div class="reveal">
         <div class="section-eyebrow">The maker</div>
         <h3>Every piece starts as a single ball of yarn</h3>
-        <p>Hi, I'm Oluwatoyosi — I've been crocheting for over 3 years, turning quiet evenings into blankets, plushies, and wearable pieces. Everything here is handmade and unique, using yarn I actually love working with.</p>
+        <p>Hi, I'm Oluwatoyosi — I've been crocheting for over 3 years, turning quiet evenings into blankets, plushies, and wearable pieces. Everything here is handmade and unique, using yarn I actu[...]
         <p>No two pieces come out exactly the same, and that's the part I like best.</p>
         <div class="about-signature">— stitched to the tiniest detail</div>
       </div>
@@ -390,14 +390,14 @@
     <div class="contact reveal">
       <div>
         <h2>Have something in mind?</h2>
-        <p>Tell me what you're picturing and I'll get back to you within a couple of days with pricing and timing.</p>
+        <p>Fill out the form and it will open WhatsApp with your custom order details ready to send.</p>
         <div class="contact-list">
           <div>Instagram — @nicolette.crochets</div>
           <div>WhatsApp — +2349039401350</div>
           <div>Based in Lagos — ships worldwide</div>
         </div>
       </div>
-      <form action="/submit-form" method="POST">
+      <form id="contact-form">
         <div>
           <label for="name">Name</label>
           <input id="name" name="name" type="text" placeholder="Your name" required>
@@ -410,7 +410,7 @@
           <label for="details">What are you picturing?</label>
           <textarea id="details" name="details" placeholder="Colors, size, occasion, deadline..." required></textarea>
         </div>
-        <button type="submit" class="btn btn-primary">Send request</button>
+        <button type="submit" class="btn btn-primary">Send on WhatsApp</button>
       </form>
     </div>
   </section>
@@ -427,6 +427,8 @@
     accessToken: 'YOUR_DELIVERY_ACCESS_TOKEN',
     contentType: 'product'
   };
+
+  const WHATSAPP_NUMBER = '2349039401350';
 
   const seedProducts = [
     {
@@ -579,7 +581,7 @@
   }
 
   async function fetchContentfulProducts() {
-    const endpoint = `https://cdn.contentful.com/spaces/${encodeURIComponent(CONTENTFUL_CONFIG.spaceId)}/environments/${encodeURIComponent(CONTENTFUL_CONFIG.environment)}/entries?content_type=${encodeURIComponent(CONTENTFUL_CONFIG.contentType)}&include=2&order=-sys.createdAt`;
+    const endpoint = `https://cdn.contentful.com/spaces/${encodeURIComponent(CONTENTFUL_CONFIG.spaceId)}/environments/${encodeURIComponent(CONTENTFUL_CONFIG.environment)}/entries?content_type=${encodeURIComponent(CONTENTFUL_CONFIG.contentType)}`;
     const response = await fetch(endpoint, {
       headers: {
         Authorization: 'Bearer ' + CONTENTFUL_CONFIG.accessToken
@@ -631,6 +633,21 @@
 
   // Scroll reveal logic
   observeRevealElements(document.querySelectorAll('#about .reveal, #gallery .section-head.reveal, #process .reveal, #contact .reveal'));
+
+  // WhatsApp form routing
+  const contactForm = document.getElementById('contact-form');
+  contactForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const details = document.getElementById('details').value.trim();
+
+    const message = `Hi, my name is ${name}.\nMy email is ${email}.\n\nI’d like to place a custom order:\n${details}`;
+    const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+
+    window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+  });
 
   // Mobile menu logic
   const menuToggle = document.querySelector('.menu-toggle');
