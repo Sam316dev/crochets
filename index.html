@@ -10,13 +10,13 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;0,600;1,400&family=Work+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --cream: #F7F2E9;
-    --sage: #A9B79C;
-    --sage-dark: #5F6E52;
-    --clay: #C77B58;
-    --walnut: #4A3F35;
-    --walnut-soft: #6B5D4F;
-    --thread: #D8CBB4;
+    --cream: #FFFFFF;
+    --sage: #B996D9;
+    --sage-dark: #6C4AB6;
+    --clay: #E7B6D8;
+    --walnut: #1F1F1F;
+    --walnut-soft: #4A3D58;
+    --thread: #F4ECFA;
   }
   
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -62,7 +62,7 @@
     display: flex; justify-content: space-between; align-items: center;
     padding: 20px 6vw;
     z-index: 100;
-    background: linear-gradient(to bottom, rgba(247,242,233,0.98) 70%, rgba(247,242,233,0));
+    background: linear-gradient(to bottom, rgba(255,255,255,0.98) 70%, rgba(255,255,255,0));
     transition: background 0.3s ease;
   }
   
@@ -160,8 +160,8 @@
     font-size: 14px; letter-spacing: 0.02em; transition: all 0.25s ease;
     text-align: center;
   }
-  .btn-primary { background: var(--walnut); color: var(--cream); }
-  .btn-primary:hover, .btn-primary:focus { background: var(--clay); transform: translateY(-2px); outline: none;}
+  .btn-primary { background: var(--sage-dark); color: var(--cream); }
+  .btn-primary:hover, .btn-primary:focus { background: #5A3A97; transform: translateY(-2px); outline: none;}
   .btn-ghost { border: 1px solid var(--walnut-soft); }
   .btn-ghost:hover, .btn-ghost:focus { background: var(--walnut); color: var(--cream); border-color: var(--walnut); outline: none;}
 
@@ -184,7 +184,7 @@
   }
   .about-img::before {
     content: ''; position: absolute; inset: 0;
-    background: repeating-linear-gradient(45deg, transparent, transparent 12px, rgba(74,63,53,0.05) 12px, rgba(74,63,53,0.05) 13px);
+    background: repeating-linear-gradient(45deg, transparent, transparent 12px, rgba(31,31,31,0.05) 12px, rgba(31,31,31,0.05) 13px);
   }
   .about-img.has-photo::before { content: none; }
   .about h3 { font-size: clamp(24px, 5vw, 30px); margin-bottom: 20px; line-height: 1.2; }
@@ -205,7 +205,7 @@
   }
   .piece-img::before {
     content: ''; position: absolute; inset: 0;
-    background: repeating-linear-gradient(-45deg, transparent, transparent 10px, rgba(74,63,53,0.05) 10px, rgba(74,63,53,0.05) 11px);
+    background: repeating-linear-gradient(-45deg, transparent, transparent 10px, rgba(31,31,31,0.05) 10px, rgba(31,31,31,0.05) 11px);
   }
   .piece-img.has-photo::before { content: none; }
   .piece:hover .piece-img { transform: scale(1.03); }
@@ -232,24 +232,24 @@
     display: grid; grid-template-columns: 1fr 1fr; gap: 56px;
   }
   .contact h2 { color: var(--cream); font-size: clamp(28px,6vw,38px); margin-bottom: 16px; line-height: 1.1; }
-  .contact p { color: #D9CFC2; max-width: 380px; margin-bottom: 8px; }
-  .contact-list { margin-top: 28px; font-size: 15px; color: #D9CFC2; }
+  .contact p { color: #EADDF2; max-width: 380px; margin-bottom: 8px; }
+  .contact-list { margin-top: 28px; font-size: 15px; color: #EADDF2; }
   .contact-list div { margin-bottom: 10px; display: flex; gap: 10px; }
 
   form { display: flex; flex-direction: column; gap: 16px; }
-  label { font-size: 13px; letter-spacing: 0.04em; color: #D9CFC2; margin-bottom: 6px; display: block; }
+  label { font-size: 13px; letter-spacing: 0.04em; color: #EADDF2; margin-bottom: 6px; display: block; }
   input, textarea {
-    width: 100%; background: rgba(247,242,233,0.08); border: 1px solid rgba(247,242,233,0.25);
+    width: 100%; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.25);
     border-radius: 10px; padding: 12px 14px; color: var(--cream); font-family: 'Work Sans', sans-serif; font-size: 15px;
     transition: border-color 0.3s ease;
   }
   input:focus, textarea:focus { outline: none; border-color: var(--clay); }
-  input::placeholder, textarea::placeholder { color: #c4b9ad; }
+  input::placeholder, textarea::placeholder { color: #CDBBD8; }
   textarea { resize: vertical; min-height: 100px; }
   .contact form .btn-primary {
-    background: var(--clay); color: var(--cream); border: none; cursor: pointer; margin-top: 6px;
+    background: var(--sage-dark); color: var(--cream); border: none; cursor: pointer; margin-top: 6px;
   }
-  .contact form .btn-primary:hover, .contact form .btn-primary:focus { background: #E0966D; }
+  .contact form .btn-primary:hover, .contact form .btn-primary:focus { background: #5A3A97; }
 
   footer { text-align: center; padding: 48px 6vw 56px; font-size: 14px; color: var(--walnut-soft); }
 
