@@ -195,13 +195,22 @@
 
   .gallery { max-width: 1200px; margin: 0 auto; }
   .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
-  .piece { cursor: default; }
+  .piece {
+    cursor: pointer;
+    background: none; border: none; text-align: left; width: 100%;
+    padding: 0; font-family: inherit; color: inherit;
+  }
+  .piece:focus-visible { outline: 2px solid var(--sage-dark); outline-offset: 4px; border-radius: 14px; }
   .piece-img {
     aspect-ratio: 1; border-radius: 14px; background: var(--thread);
     position: relative; overflow: hidden;
     display: flex; align-items: center; justify-content: center;
     color: var(--walnut-soft); font-size: 13px;
     transition: transform 0.5s ease;
+  }
+  .piece-cta {
+    margin-top: 8px; font-size: 13px; color: var(--sage-dark);
+    display: flex; align-items: center; gap: 6px;
   }
   .piece-img::before {
     content: ''; position: absolute; inset: 0;
@@ -346,8 +355,8 @@
       <div class="reveal">
         <div class="section-eyebrow">The maker</div>
         <h3>Every piece starts as a single ball of yarn</h3>
-       <p>Hi, I'm Nicolette. I picked up a crochet hook about 3 years ago just to have something to do with my evenings, and it kind of took over. Now most of my free time goes into turning yarn into beanies, plushies, baby sets, whatever I'm feeling that week.</p>
-<p>Everything here is made by hand, so no two pieces come out exactly alike. That's my favorite part. If you see something you like, or have an idea in your head, send me a message and let's make it real.</p>
+        <p>Hi, I'm Oluwatoyosi — I've been crocheting for over 3 years, turning quiet evenings into blankets, plushies, and wearable pieces. Everything here is handmade and unique, using yarn I actually enjoy working with.</p>
+        <p>No two pieces come out exactly the same, and that's the part I like best.</p>
         <div class="about-signature">— stitched to the tiniest detail</div>
       </div>
     </div>
@@ -376,12 +385,12 @@
       <div class="process-step reveal">
         <div class="process-icon">2</div>
         <h3>We settle the details</h3>
-        <p>I'll follow up with yarn options, timeline, and a price before anything gets started.</p>
+        <p>I'll get back to you with yarn options, timeline, and a price. I'm a full-time student, so replies come between classes, but I always follow up.</p>
       </div>
       <div class="process-step reveal">
         <div class="process-icon">3</div>
         <h3>It's made by hand</h3>
-        <p>Most pieces take 1-3 weeks depending on size. You'll get progress photos along the way.</p>
+        <p>Most pieces take 1-3 weeks depending on size and my schedule that week. You'll get progress photos along the way.</p>
       </div>
     </div>
   </section>
@@ -391,6 +400,7 @@
       <div>
         <h2>Have something in mind?</h2>
         <p>Fill out the form and it will open WhatsApp with your custom order details ready to send.</p>
+        <p>I'm currently in school, so I take on a limited number of custom pieces at a time and reply as soon as I'm free. Thanks for your patience!</p>
         <div class="contact-list">
           <div>Instagram — @nicolette.crochets</div>
           <div>WhatsApp — +2349039401350</div>
@@ -522,8 +532,10 @@
     const fragment = document.createDocumentFragment();
 
     products.forEach((product) => {
-      const piece = document.createElement('div');
+      const piece = document.createElement('button');
+      piece.type = 'button';
       piece.className = 'piece reveal';
+      piece.setAttribute('aria-label', `Ask about ${product.title || 'this piece'} on WhatsApp`);
 
       const imageWrap = document.createElement('div');
       imageWrap.className = 'piece-img';
@@ -558,6 +570,15 @@
       price.className = 'piece-price';
       price.textContent = formatPrice(product.price);
       piece.appendChild(price);
+
+      const cta = document.createElement('div');
+      cta.className = 'piece-cta';
+      cta.textContent = 'Ask about this →';
+      piece.appendChild(cta);
+
+      piece.addEventListener('click', () => {
+        sendProductInquiry(product);
+      });
 
       fragment.appendChild(piece);
     });
@@ -625,6 +646,19 @@
     }
   }
 
+  function sendProductInquiry(product) {
+    const priceText = formatPrice(product.price);
+    const lines = [
+      `Hi, I'm interested in the "${product.title}" I saw on your website.`
+    ];
+    if (priceText) lines.push(`Listed price: ${priceText}`);
+    lines.push('Is it still available?');
+
+    const message = lines.join('\n');
+    const whatsappUrl = `https://api.whatsapp.com/send?phone=${WHATSAPP_NUMBER}&text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+  }
+
   loadProducts();
 
   // Scroll reveal logic
@@ -639,7 +673,7 @@
     const details = document.getElementById('details').value.trim();
 
     const message = `Hi, my name is ${name}.\n\nI'd like to place a custom order:\n${details}`;
-    const whatsappUrl = `https://api.whatsapp.com/send?phone=2349039401350&text=${encodeURIComponent(message)}`;
+    const whatsappUrl = `https://api.whatsapp.com/send?phone=${WHATSAPP_NUMBER}&text=${encodeURIComponent(message)}`;
 
     window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
   });
