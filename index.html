@@ -313,8 +313,8 @@
 <body>
 
 <header>
-  <a href="#" class="logo" aria-label="Nicolette Crochets Home">
-    <img src="assets/logo.jpg" alt="Nicolette Crochets logo" class="logo-img">
+  <a href="#" class="logo" aria-label="Nicolette.crochets Home">
+    <img src="assets/logo.jpg" alt="Nicolette.crochets logo" class="logo-img">
   </a>
   <button class="menu-toggle" aria-label="Toggle mobile menu" aria-expanded="false">
     <span class="hamburger"></span>
@@ -329,7 +329,7 @@
 
 <main>
   <section class="hero" id="home">
-    <div class="hero-eyebrow">Nicolette&rsquo;s Crochets</div>
+    <div class="hero-eyebrow">Nicolette.crochets</div>
     <h1>Handmade crochet pieces from Lagos</h1>
     <p>Beanies, blankets, wearables, and custom pieces made by hand for people who want something personal.</p>
     <div class="hero-cta">
@@ -346,8 +346,8 @@
       <div class="reveal">
         <div class="section-eyebrow">The maker</div>
         <h3>Every piece starts as a single ball of yarn</h3>
-        <p>Hi, I'm Oluwatoyosi — I've been crocheting for over 3 years, turning quiet evenings into blankets, plushies, and wearable pieces. Everything here is handmade and unique, using yarn I actu[...]
-        <p>No two pieces come out exactly the same, and that's the part I like best.</p>
+       <p>Hi, I'm Oluwatoyosi. I picked up a crochet hook about 3 years ago just to have something to do with my evenings, and it kind of took over. Now most of my free time goes into turning yarn into beanies, plushies, baby sets, whatever I'm feeling that week.</p>
+<p>Everything here is made by hand, so no two pieces come out exactly alike. That's my favorite part. If you see something you like, or have an idea in your head, send me a message and let's make it real.</p>
         <div class="about-signature">— stitched to the tiniest detail</div>
       </div>
     </div>
@@ -413,7 +413,7 @@
 </main>
 
 <footer>
-  Nicolette&rsquo;s Crochets — Handmade in Lagos
+  Nicolette.crochets — Handmade in Lagos
 </footer>
 
 <script>
@@ -625,25 +625,6 @@
     }
   }
 
-  <script>
-  const WHATSAPP_NUMBER = '2349039401350'; // no + sign, no spaces
-
-  const contactForm = document.getElementById('contact-form');
-
-  contactForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-
-    const name = document.getElementById('name').value.trim();
-    const email = document.getElementById('email').value.trim();
-    const details = document.getElementById('details').value.trim();
-
-    const message = `Hi, my name is ${name}.\nMy email is ${email}.\n\nI’d like to place a custom order:\n${details}`;
-
-    const whatsappUrl = `https://wa.me/$+2349039401350?text=${encodeURIComponent(message)}`;
-
-    window.open(whatsappUrl, '_blank');
-  });
-</script>
   loadProducts();
 
   // Scroll reveal logic
@@ -655,11 +636,10 @@
     e.preventDefault();
 
     const name = document.getElementById('name').value.trim();
-    const email = document.getElementById('email').value.trim();
     const details = document.getElementById('details').value.trim();
 
-    const message = `Hi, my name is ${name}.\nMy email is ${email}.\n\nI’d like to place a custom order:\n${details}`;
-    const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+    const message = `Hi, my name is ${name}.\n\nI'd like to place a custom order:\n${details}`;
+    const whatsappUrl = `https://wa.me/$+2349039401350?text=${encodeURIComponent(message)}`;
 
     window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
   });
