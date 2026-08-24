@@ -211,7 +211,15 @@
   .piece:hover .piece-img { transform: scale(1.03); }
   .piece-img img { border-radius: inherit; }
   .piece-title { margin-top: 16px; font-size: 17px; font-weight: 500; font-family: 'Fraunces', serif; }
+  .piece-subtitle { margin-top: 6px; font-size: 14px; color: var(--walnut-soft); }
   .piece-price { margin-top: 4px; font-size: 14px; color: var(--walnut-soft); }
+  .gallery-status {
+    margin: 0 auto 18px;
+    max-width: 1200px;
+    text-align: center;
+    font-size: 14px;
+    color: var(--walnut-soft);
+  }
 
   .process {
     max-width: 1000px; margin: 0 auto;
@@ -350,42 +358,8 @@
       <div class="section-eyebrow">The shop</div>
       <h2>Recent favorites</h2>
     </div>
-    <div class="gallery gallery-grid">
-      <div class="piece reveal">
-        <div class="piece-img has-photo">
-          <img src="assets/beanie.jpg" alt="Handmade grey ribbed beanie" class="img-cover">
-        </div>
-        <div class="piece-title">Ribbed knit beanie</div>
-        <div class="piece-price">$25</div>
-      </div>
-      <div class="piece reveal">
-        <div class="piece-img">product photo</div>
-        <div class="piece-title">Little fox amigurumi</div>
-        <div class="piece-price">$28</div>
-      </div>
-      <div class="piece reveal">
-        <div class="piece-img has-photo">
-          <img src="assets/ruffle-dress.jpg" alt="Handmade tiered ruffle baby dress" class="img-cover">
-        </div>
-        <div class="piece-title">Tiered ruffle baby dress</div>
-        <div class="piece-price">$60</div>
-      </div>
-      <div class="piece reveal">
-        <div class="piece-img">product photo</div>
-        <div class="piece-title">Market tote bag</div>
-        <div class="piece-price">$42</div>
-      </div>
-      <div class="piece reveal">
-        <div class="piece-img">product photo</div>
-        <div class="piece-title">Baby set + hat</div>
-        <div class="piece-price">$36</div>
-      </div>
-      <div class="piece reveal">
-        <div class="piece-img">product photo</div>
-        <div class="piece-title">Textured cushion cover</div>
-        <div class="piece-price">$32</div>
-      </div>
-    </div>
+    <div id="gallery-status" class="gallery-status" role="status" aria-live="polite">Loading products...</div>
+    <div id="gallery-grid" class="gallery gallery-grid"></div>
   </section>
 
   <section id="process">
@@ -447,8 +421,61 @@
 </footer>
 
 <script>
-  // Scroll reveal logic
-  const revealEls = document.querySelectorAll('.reveal');
+  const CONTENTFUL_CONFIG = {
+    spaceId: 'YOUR_SPACE_ID',
+    environment: 'master',
+    accessToken: 'YOUR_DELIVERY_ACCESS_TOKEN',
+    contentType: 'product'
+  };
+
+  const seedProducts = [
+    {
+      title: 'Ribbed knit beanie',
+      description: 'Soft everyday beanie in a cozy ribbed stitch.',
+      price: '$25',
+      image: 'assets/beanie.jpg',
+      imageAlt: 'Handmade grey ribbed beanie'
+    },
+    {
+      title: 'Little fox amigurumi',
+      description: 'A playful desk buddy with hand-stitched details.',
+      price: '$28',
+      image: '',
+      imageAlt: 'Little fox amigurumi crochet plush'
+    },
+    {
+      title: 'Tiered ruffle baby dress',
+      description: 'Tiered dress with gentle ruffles for special moments.',
+      price: '$60',
+      image: 'assets/ruffle-dress.jpg',
+      imageAlt: 'Handmade tiered ruffle baby dress'
+    },
+    {
+      title: 'Market tote bag',
+      description: 'Roomy carry-all for errands, beach days, and gifts.',
+      price: '$42',
+      image: '',
+      imageAlt: 'Crochet market tote bag'
+    },
+    {
+      title: 'Baby set + hat',
+      description: 'Matching set in soft yarn for little ones.',
+      price: '$36',
+      image: '',
+      imageAlt: 'Crochet baby set with matching hat'
+    },
+    {
+      title: 'Textured cushion cover',
+      description: 'Textured stitch pattern to warm up living spaces.',
+      price: '$32',
+      image: '',
+      imageAlt: 'Textured crochet cushion cover'
+    }
+  ];
+
+  const galleryGrid = document.getElementById('gallery-grid');
+  const galleryStatus = document.getElementById('gallery-status');
+
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -457,7 +484,153 @@
       }
     });
   }, { threshold: 0.15 });
-  revealEls.forEach(el => observer.observe(el));
+
+  function observeRevealElements(elements) {
+    elements.forEach(el => observer.observe(el));
+  }
+
+  function updateGalleryStatus(message) {
+    galleryStatus.textContent = message;
+  }
+
+  function normalizeAssetUrl(url) {
+    if (!url) return '';
+    if (url.startsWith('//')) return `https:${url}`;
+    return url;
+  }
+
+  function formatPrice(value) {
+    if (value == null) return '';
+    if (typeof value === 'number' && Number.isFinite(value)) {
+      return `$${value.toFixed(2).replace(/\.00$/, '')}`;
+    }
+    return String(value).trim();
+  }
+
+  function resolveImageUrl(imageField, assetMap) {
+    if (!imageField) return '';
+    if (imageField.fields?.file?.url) {
+      return normalizeAssetUrl(imageField.fields.file.url);
+    }
+    const assetId = imageField.sys?.id;
+    if (assetId && assetMap.has(assetId)) {
+      return normalizeAssetUrl(assetMap.get(assetId).fields?.file?.url || '');
+    }
+    return '';
+  }
+
+  function renderProducts(products) {
+    galleryGrid.innerHTML = '';
+    const fragment = document.createDocumentFragment();
+
+    products.forEach((product) => {
+      const piece = document.createElement('div');
+      piece.className = 'piece reveal';
+
+      const imageWrap = document.createElement('div');
+      imageWrap.className = 'piece-img';
+
+      if (product.image) {
+        imageWrap.classList.add('has-photo');
+        const image = document.createElement('img');
+        image.src = product.image;
+        image.alt = product.imageAlt || product.title || 'Crochet product photo';
+        image.className = 'img-cover';
+        image.loading = 'lazy';
+        imageWrap.appendChild(image);
+      } else {
+        imageWrap.textContent = 'product photo';
+      }
+
+      const title = document.createElement('div');
+      title.className = 'piece-title';
+      title.textContent = product.title || 'Untitled product';
+
+      piece.appendChild(imageWrap);
+      piece.appendChild(title);
+
+      if (product.description) {
+        const subtitle = document.createElement('div');
+        subtitle.className = 'piece-subtitle';
+        subtitle.textContent = product.description;
+        piece.appendChild(subtitle);
+      }
+
+      const price = document.createElement('div');
+      price.className = 'piece-price';
+      price.textContent = formatPrice(product.price);
+      piece.appendChild(price);
+
+      fragment.appendChild(piece);
+    });
+
+    galleryGrid.appendChild(fragment);
+    observeRevealElements(galleryGrid.querySelectorAll('.reveal'));
+  }
+
+  function isContentfulConfigured() {
+    return Boolean(
+      CONTENTFUL_CONFIG.spaceId &&
+      CONTENTFUL_CONFIG.accessToken &&
+      CONTENTFUL_CONFIG.contentType &&
+      CONTENTFUL_CONFIG.spaceId !== 'YOUR_SPACE_ID' &&
+      CONTENTFUL_CONFIG.accessToken !== 'YOUR_DELIVERY_ACCESS_TOKEN'
+    );
+  }
+
+  async function fetchContentfulProducts() {
+    const endpoint = `https://cdn.contentful.com/spaces/${encodeURIComponent(CONTENTFUL_CONFIG.spaceId)}/environments/${encodeURIComponent(CONTENTFUL_CONFIG.environment)}/entries?content_type=${encodeURIComponent(CONTENTFUL_CONFIG.contentType)}&include=2&order=-sys.createdAt`;
+    const response = await fetch(endpoint, {
+      headers: {
+        Authorization: 'Bearer ' + CONTENTFUL_CONFIG.accessToken
+      }
+    });
+
+    if (!response.ok) {
+      throw new Error('Could not load products from Contentful.');
+    }
+
+    const payload = await response.json();
+    const assets = new Map((payload.includes?.Asset || []).map(asset => [asset.sys.id, asset]));
+
+    return (payload.items || []).map((item) => {
+      const fields = item.fields || {};
+      return {
+        title: fields.title || '',
+        description: fields.description || fields.subtitle || '',
+        price: fields.price,
+        image: resolveImageUrl(fields.image, assets),
+        imageAlt: fields.imageAlt || fields.title || 'Crochet product image'
+      };
+    }).filter(product => product.title);
+  }
+
+  async function loadProducts() {
+    if (!isContentfulConfigured()) {
+      renderProducts(seedProducts);
+      updateGalleryStatus('Showing sample products. Add Contentful settings in the script config block to publish live products.');
+      return;
+    }
+
+    try {
+      const contentfulProducts = await fetchContentfulProducts();
+      if (contentfulProducts.length) {
+        renderProducts(contentfulProducts);
+        updateGalleryStatus('Showing latest products from Contentful.');
+      } else {
+        renderProducts(seedProducts);
+        updateGalleryStatus('No published products found in Contentful yet. Showing sample products.');
+      }
+    } catch (error) {
+      renderProducts(seedProducts);
+      updateGalleryStatus('Unable to reach Contentful right now. Showing sample products instead.');
+    }
+  }
+
+  loadProducts();
+
+  // Scroll reveal logic
+  observeRevealElements(document.querySelectorAll('#about .reveal, #gallery .section-head.reveal, #process .reveal, #contact .reveal'));
 
   // Mobile menu logic
   const menuToggle = document.querySelector('.menu-toggle');
